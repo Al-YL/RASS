@@ -35,3 +35,12 @@ creat/parfile detemap detemap rosat,survey
 write/parfile detemap min_ml 7.0
 write/parfile detemap num_images 3
 detect/map detemap
+
+! Merging of source lists: 0.5-2.0 keV
+create/parfile mergsou mergsou rosat,survey
+write/parfile mergsou num_images 1
+write/parfile mergsou ldetect_list_1 lslst3.tbl
+write/parfile mergsou mdetect_list_1 mslst3.tbl
+write/parfile mergsou merged_list mplst3.tbl
+write/parfile mergsou BG_IMAGE_1 bacmp3.bdf
+merg/sou mergsou
