@@ -15,13 +15,13 @@ create/parfile deteloc deteloc rosat,survey
 ! Modify parameters, ML = 7 (Voges et al. 1999)
 write/parfile deteloc min_ml 7.0
 ! 3 images created
-write/parfile deteloc num_images 3
+write/parfile deteloc num_images 6
 ! Create source lists: lslstX.bdf with sources ML > 7
 detect/local deteloc
 
 ! Background source detection:
 create/parfile creabg creabg rosat,survey
-write/parfile creabg num_images 3
+write/parfile creabg num_images 6
 write/parfile creabg min_ml 7.0
 write/parfile creabg mask_flag F
 write/parfile creabg exposure_flag T
