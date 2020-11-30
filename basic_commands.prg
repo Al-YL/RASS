@@ -36,7 +36,7 @@ create/bg_image creabg
 
 creat/parfile detemap detemap rosat,survey
 write/parfile detemap min_ml 7.0
-write/parfile detemap num_images 3
+write/parfile detemap num_images 6
 detect/map detemap
 
 ! Merging of source lists: 0.5-2.0 keV
