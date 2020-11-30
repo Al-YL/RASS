@@ -7,8 +7,8 @@ intape/rdf disk rs anc,bas,mex
 ! If broad-band exposure map <exposure.bdf> has not created by the above command (unknown reason), then:
 intape/rdf disk rs*_mex.fits mex
 
-! 512x512 binned image: broad-band (image1), soft-band (image2), hard-band (image3)
-create/source_detect_image events 11-235,11-41,52-201
+! 512x512 binned image (Th.Boller et al. 2016): broad-band (image1), soft-band (image2), hard-band (image3), medium-band (image4), very-hard-band (image5), wide-band (image6)
+create/source_detect_image events 11-235,11-41,52-201,52-90,91-201,11-201
 
 ! Local source detection:
 create/parfile deteloc deteloc rosat,survey
@@ -28,6 +28,9 @@ write/parfile creabg exposure_flag T
 write/parfile creabg exposure_image_1 exposure.bdf
 write/parfile creabg exposure_image_2 exposure.bdf
 write/parfile creabg exposure_image_3 exposure.bdf
+write/parfile creabg exposure_image_4 exposure.bdf
+write/parfile creabg exposure_image_5 exposure.bdf
+write/parfile creabg exposure_image_6 exposure.bdf
 create/bg_image creabg
 ! Output spline-fitted background images: bacmpX.bdf
 
