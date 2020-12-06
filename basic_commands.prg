@@ -1,14 +1,21 @@
-!--Convert ROD (ROSAT Observation Dataset) from fits file to EXSAS format
+!--Convert ROD (ROSAT Observation Dataset) from fits file to EXSAS format------------------------------------------------
 ! For more details:
 !	help intape/rdf
- 
+
 intape/rdf disk rs anc,bas,mex
 
-! If broad-band exposure map <exposure.bdf> has not created by the above command (unknown reason), then:
+! If broad band exposure map <exposure.bdf> has not created by the above command (unknown reason), then
 intape/rdf disk rs*_mex.fits mex
+!------------------------------------------------------------------------------------------------------------------------
 
-! 512x512 binned image (Th.Boller et al. 2016): broad-band (image1), soft-band (image2), hard-band (image3), medium-band (image4), very-hard-band (image5), wide-band (image6)
+
+!--Generate 512x512 binned images----------------------------------------------------------------------------------------
+! Th.Boller et al. 2016: 
+!     broad-band (image1), soft-band (image2), hard-band (image3), 
+!     medium-band (image4), very-hard-band (image5), wide-band (image6)
 create/source_detect_image events 11-235,11-41,52-201,52-90,91-201,11-201
+!------------------------------------------------------------------------------------------------------------------------
+
 
 ! Local source detection:
 create/parfile deteloc deteloc rosat,survey
