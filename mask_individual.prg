@@ -8,8 +8,7 @@ define/local rsou/r/1/1 0.
 define/local Remark/c/1/1 " " all
 set/format I6
 
-!--Image Show------------------------------------------------------------------------------------------
-! Set the Display Window (#0)
+!--Image shown in the Display Window #0----------------------------------------------------------------
 assign/dis 0
 
 !--Select the {P1}^{th} Source to Mask-----------------------------------------------------------------
@@ -27,22 +26,27 @@ draw/source solst3
 mask:	
 	xm = {solst3.tbl,:X_SKY,@{P1}} 
 	ym = {solst3.tbl,:Y_SKY,@{P1}}
-	Inquire/keyword rsou "input mask radius (unit:ima_pix) ?"
-	rad =  {rsou}/2.*90 
-	!radius of image mask of individual source
+	Inquire/keyword rsou "Input Mask Image Size (unit:ima_pix) ?"
+	
+	!--Compute the radius of image mask of that source---------------------------------------------
+	rad =  {rsou}/2. * 90 
 	write/out "Mask out region" {xm} {ym} "radius" {rsou} "pixel"
 	x1 = xm - rad
 	y1 = ym + rad
-	create/image source_mask{P1} 2,{rsou},{rsou} {x1},{y1},90,-90 CIRCLE {rad},0,1
-	assign/dis 1 
+	
+	!--Create the mask frame-----------------------------------------------------------------------
+	create/image source_mask_{P1} 2,{rsou},{rsou} {x1},{y1},90,-90 CIRCLE {rad},0,1
+	
+	!--Masked Image shown in the Display Window #1 for comparison----------------------------------
+	assign/dis 1
 	$cp mask.bdf mask1.bdf
-	ins/ima source_mask{P1} mask1
-	comp/ima mask1 = mask1*mask
-	comp/ima ima3_M = image3*mask1
-	FILTER/GAUS ima3_M.bdf ima3S_M 3,3 3,1,3,1
+	ins/ima source_mask_{P1} mask1
+	comp/ima mask1 = mask1 * mask
+	comp/ima ima3_M = image3 * mask1
+	filter/gaus ima3_M.bdf ima3S_M 3,3 3,1,3,1
 	load/image ima3S_M cuts=0,2
 	draw/source solst3 0 cross
-	Inquire/keyword Remark "If this auotmatic mask_expo OK? (y/n)"
+	Inquire/keyword Remark "If this auotmatic mask OK? (y/n)"
 	if Remark(1:1) .eq. "y" then
   		$cp mask1.bdf mask.bdf
 	else
