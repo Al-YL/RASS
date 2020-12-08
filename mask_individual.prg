@@ -44,11 +44,11 @@ mask:
 	comp/ima mask1 = mask1 * mask
 	comp/ima ima3_M = image3 * mask1
 	filter/gaus ima3_M.bdf ima3S_M 3,3 3,1,3,1
-	load/image ima3S_M cuts=0,2
+	load/image ima3S_M cuts = 0,2
 	draw/source solst3 0 cross
 	Inquire/keyword Remark "If this auotmatic mask OK? (y/n)"
 	if Remark(1:1) .eq. "y" then
-  		$cp mask1.bdf mask.bdf
+  		$ cp mask1.bdf mask.bdf
 	else
 		goto mask
 	endif
